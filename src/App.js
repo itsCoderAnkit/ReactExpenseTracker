@@ -1,10 +1,11 @@
 //import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 //import ExpenseItem from './components/ExpenseItem';
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
-function App() {
-  const expenses = [
+
+  const DUMMY_EXPENSES = [
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -29,16 +30,21 @@ function App() {
     },
   ];
 
+  function App() {
+const [expenses, setExpenses] = useState(DUMMY_EXPENSES)
 const addExpenseHandler = (expense) =>{
-  console.log('app')
-  console.log(expense)
-  expenses.push(expense)
+  setExpenses((prevExpenses) =>{
+    return [expense, ...prevExpenses]
+  })
+  // console.log('app')
+  // console.log(expense)
+  
 }
 
   return (
     <div className="App">
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
-      <Expenses item={expenses}></Expenses>
+      <Expenses items={expenses}></Expenses>
 
     </div>
   );
